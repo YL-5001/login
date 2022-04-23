@@ -17,8 +17,57 @@
             <input type="text" class="tbx" placeholder="账号">
             <input type="password" class="tbx" placeholder="密码">
             <input type="submit" class="sub" value="登录">
-
         </form>
     </div>
+
+    <script>
+        // 定义一个con绑定.container
+        const con = document.querySelector('.container')
+
+        // 定义两个函数开关
+        let isIn = true //鼠标进去的门，默认打开
+        let isOut = false   //出去的门
+        
+        var span
+        // 鼠标移入
+        con.addEventListener('mouseenter',(e)=>{
+            if(isIn){
+                let inX = e.clientX-e.target.offsetLeft
+                let inY = e.clientY-e.target.offsetTop
+
+                let el = document.createElement('span')
+                el.style.left = inX + 'px'
+                el.style.top = inY + 'px'
+
+                con.appendChild(el)
+
+                $('.container span').removeClass('out')
+                $('.container span').addClass('in')
+
+                span = document.querySelector('.container span')
+                isIn = false
+                isOut = true
+
+            }
+        })
+
+        // 鼠标移出
+        con.addEventListener('mouseenter',(e)=>{
+            if(isOut){
+                let outX = e.clientX-e.target.offsetLeft
+                let outY = e.clientY-e.target.offsetTop
+
+                $('.container span').removeClass('in')
+                $('.container span').addClass('out')
+
+                $('.out').css('left',outX + 'px')
+                $('.out').css('top',outY + 'px')
+
+                isOut = false
+                setTimeout(()=> {
+                    con.removeChild(span)
+                    isIn = true
+                },500)
+    </script>
 </body>
 </html>
